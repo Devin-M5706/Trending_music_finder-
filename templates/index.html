@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="mb-4">Your Top Tracks</h2>
+        <div class="row">
+            {% for track in top_tracks %}
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <img src="{{ track.album.images[0].url }}" class="card-img-top track-image" alt="{{ track.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ track.name }}</h5>
+                        <p class="card-text">
+                            {% for artist in track.artists %}
+                                {{ artist.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                        <a href="{{ track.external_urls.spotify }}" target="_blank" class="btn btn-success">
+                            <i class="fab fa-spotify"></i> Play on Spotify
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <h2 class="mb-4">New Releases</h2>
+        <div class="row">
+            {% for album in new_releases %}
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <img src="{{ album.images[0].url }}" class="card-img-top track-image" alt="{{ album.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ album.name }}</h5>
+                        <p class="card-text">
+                            {% for artist in album.artists %}
+                                {{ artist.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                        <a href="{{ album.external_urls.spotify }}" target="_blank" class="btn btn-success">
+                            <i class="fab fa-spotify"></i> View on Spotify
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %} 
